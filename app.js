@@ -1,6 +1,6 @@
 var wechat = require('wechat');
 var config = {
-  token: 'weixin',
+  token: 'wxd8ffa8619684a575',
   appid: 'weixinjk',
   encodingAESKey: 'GlDzKWLBiliqLvDROtraB7HaudGq9hKABxgAw5BbkAm'
 };
