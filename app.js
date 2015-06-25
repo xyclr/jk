@@ -41,7 +41,7 @@ var wechat = require('wechat');
 var config = {
   token: 'weixin',
   appid: 'wxd8ffa8619684a575',
-  encodingAESKey: '01HCbOCSsPxYbFFlOzSUAGZBIyEK5jYUn19g6H6psci'
+  encodingAESKey: 'I3If3pEsvT39FPOXOeAt1eNsL2wF2uFc0JgEJJyh0xs'
 };
 var OAuth = require('wechat-oauth');
 var client = new OAuth('wxd8ffa8619684a575', 'fbc86cc56ed5b0cad530ac2317e7933f');
