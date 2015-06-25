@@ -81,12 +81,11 @@ app.use('/wechat', wechat(config, function (req, res, next) {
         url: 'http://nodeapi.cloudfoundry.com/'
       }
     ]);
-  }
-}));
-
-var OAuth = require('wechat-oauth');
+  };
+  
+  var OAuth = require('wechat-oauth');
 var client = new OAuth('wxd8ffa8619684a575', 'fbc86cc56ed5b0cad530ac2317e7933f');
-var url = client.getAuthorizeURL('http://baidu.com', 'state', 'scope');
+var url = client.getAuthorizeURL('http://nodeapi.cloudfoundry.com/', 'state', 'scope');
 console.info("url:" + url);
 client.getAccessToken('code', function (err, result) {
   var accessToken = result.data.access_token;
@@ -94,3 +93,6 @@ client.getAccessToken('code', function (err, result) {
   console.info("accessToken:" + accessToken);
   console.info("openid:" + openid);
 });
+}));
+
+
