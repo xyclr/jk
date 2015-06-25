@@ -38,7 +38,7 @@ http.createServer(app).listen(app.get('port'), function(){
 
 var wechat = require('wechat');
 var config = {
-  token: 'weixinjd',
+  token: 'weixinjk',
   appid: 'wxd8ffa8619684a575',
   encodingAESKey: 'GlDzKWLBiliqLvDROtraB7HaudGq9hKABxgAw5BbkAm'
 };
