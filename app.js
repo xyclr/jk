@@ -42,6 +42,9 @@ var config = {
   appid: 'wxd8ffa8619684a575',
   encodingAESKey: 'GlDzKWLBiliqLvDROtraB7HaudGq9hKABxgAw5BbkAm'
 };
+var OAuth = require('wechat-oauth');
+var client = new OAuth('wxd8ffa8619684a575', 'fbc86cc56ed5b0cad530ac2317e7933f');
+var url = client.getAuthorizeURL('http://nodeapi.cloudfoundry.com/', 'state', 'scope');
 
 app.use(express.query());
 app.use('/wechat', wechat(config, function (req, res, next) {
@@ -80,5 +83,14 @@ app.use('/wechat', wechat(config, function (req, res, next) {
         url: 'http://nodeapi.cloudfoundry.com/'
       }
     ]);
-  }
+  };
+
+
+  console.info("url:" + url);
+  client.getAccessToken('code', function (err, result) {
+    var accessToken = result.data.access_token;
+    var openid = result.data.openid;
+    console.info("accessToken:" + accessToken);
+    console.info("openid:" + openid);
+  });
 }));
