@@ -87,10 +87,5 @@ app.use('/wechat', wechat(config, function (req, res, next) {
 
 
   console.info("url:" + url);
-  client.getAccessToken('code', function (err, result) {
-    var accessToken = result.data.access_token;
-    var openid = result.data.openid;
-    console.info("accessToken:" + accessToken);
-    console.info("openid:" + openid);
-  });
+ 
 }));
