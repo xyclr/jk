@@ -38,11 +38,10 @@ http.createServer(app).listen(app.get('port'), function(){
 
 var wechat = require('wechat');
 var config = {
-  token: 'weixinjk',
+  token: 'weixinjd',
   appid: 'wxd8ffa8619684a575',
   encodingAESKey: 'GlDzKWLBiliqLvDROtraB7HaudGq9hKABxgAw5BbkAm'
 };
-
 
 app.use(express.query());
 app.use('/wechat', wechat(config, function (req, res, next) {
@@ -81,7 +80,5 @@ app.use('/wechat', wechat(config, function (req, res, next) {
         url: 'http://nodeapi.cloudfoundry.com/'
       }
     ]);
-  };
-
-
+  }
 }));
