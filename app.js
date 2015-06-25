@@ -27,7 +27,7 @@ http.createServer(function (req, res) {
       FromUserName : data.ToUserName,
       ToUserName : data.FromUserName,
       //MsgType : "news",
-      Articles : [...]
+      Articles : ["xxxx"]
   }
   wechat.send(msg);
 });
