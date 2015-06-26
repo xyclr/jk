@@ -71,7 +71,7 @@ app.get('/callback', function(req, res) {
   console.log('----weixin callback -----')
   var code = req.query.code;
   console.info("code: " + code);
-  console.info("req: " + req);
+  console.info( req);console.info( req.model);
   var User = req.model.UserModel;
 
   client.getAccessToken(code, function (err, result) {
