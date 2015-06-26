@@ -27,8 +27,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+/*app.get('/', routes.index);
+app.get('/users', user.list);*/
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
@@ -50,9 +50,9 @@ var client = new OAuth('wxd8ffa8619684a575', 'fbc86cc56ed5b0cad530ac2317e7933f')
 app.use(express.query());
 
 // 主页,主要是负责OAuth认真
-app.use('/', function(req, res) {
+app.get('/', function(req, res) {
   var url = client.getAuthorizeURL('http://' + 'www.sd188.cn' + '/weixin/callback','','snsapi_userinfo');
-  res.redirect(url) 
+  res.redirect(url)
 })
 
 /**
@@ -62,10 +62,10 @@ app.use('/', function(req, res) {
  * - 如果是新用户，注册并绑定，然后跳转到手机号验证界面
  * - 如果是老用户，跳转到主页
  */
-app.use('/callback', function(req, res) {
+app.get('/callback', function(req, res) {
   console.log('----weixin callback -----')
   var code = req.query.code;
-  
+
   var User = req.model.UserModel;
 
   client.getAccessToken(code, function (err, result) {
@@ -73,7 +73,7 @@ app.use('/callback', function(req, res) {
     console.dir(result)
     var accessToken = result.data.access_token;
     var openid = result.data.openid;
-    
+
     console.log('token=' + accessToken);
     console.log('openid=' + openid);
 
@@ -85,11 +85,11 @@ app.use('/callback', function(req, res) {
           console.log('use weixin api get user: '+ err)
           console.log(result)
           var oauth_user = result;
-          
+
           var _user = new User(oauth_user);
           _user.username = oauth_user.nickname;
           _user.nickname = oauth_user.nickname;
-          
+
           _user.save(function(err, user) {
             if (err) {
               console.log('User save error ....' + err);
@@ -99,7 +99,7 @@ app.use('/callback', function(req, res) {
               res.redirect('/user/' + user._id + '/verify');
             }
           });
-          
+
         });
       }else{
         console.log('根据openid查询，用户已经存在')
@@ -156,5 +156,5 @@ app.use('/wechat', wechat(config, function (req, res, next) {
   };
 
 
- 
+
 }));
