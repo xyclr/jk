@@ -52,6 +52,7 @@ app.use(express.query());
 // 主页,主要是负责OAuth认真
 app.get('/', function(req, res) {
   var url = client.getAuthorizeURL('http://' + 'www.sd188.cn' + '/callback','','snsapi_userinfo');
+  console.info("url: " + url);
   res.redirect(url)
 })
 
@@ -65,7 +66,8 @@ app.get('/', function(req, res) {
 app.get('/callback', function(req, res) {
   console.log('----weixin callback -----')
   var code = req.query.code;
-
+  console.info("code: " + code);
+  console.info("req: " + req);
   var User = req.model.UserModel;
 
   client.getAccessToken(code, function (err, result) {
