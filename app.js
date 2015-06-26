@@ -51,7 +51,7 @@ app.use(express.query());
 
 // 主页,主要是负责OAuth认真
 app.get('/', function(req, res) {
-  var url = client.getAuthorizeURL('http://' + 'www.sd188.cn' + '/weixin/callback','','snsapi_userinfo');
+  var url = client.getAuthorizeURL('http://' + 'www.sd188.cn' + '/callback','','snsapi_userinfo');
   res.redirect(url)
 })
 
