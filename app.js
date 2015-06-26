@@ -38,14 +38,14 @@ http.createServer(app).listen(app.get('port'), function(){
 
 var wechat = require('wechat');
 var config = {
-  token: 'weixinjk',
-  appid: 'wxd8ffa8619684a575',
-  encodingAESKey: 'GlDzKWLBiliqLvDROtraB7HaudGq9hKABxgAw5BbkAm'
+  token: 'a23mnE1mgJvN2E7PEMgJg4Z37JZL4Eww',
+  appid: 'wxc5709f2ac2454001',
+  encodingAESKey: 'iTCKlJ8OPreLf8V791A7VLrDXcng6EUvFni6JAc53f9'
 };
 
 
 var OAuth = require('wechat-oauth');
-var client = new OAuth('wxd8ffa8619684a575', 'fbc86cc56ed5b0cad530ac2317e7933f');
+var client = new OAuth('wxc5709f2ac2454001', 'c6d27018801ac6e11698825a77dabe4d');
 
 app.use(express.query());
 
