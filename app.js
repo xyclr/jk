@@ -71,6 +71,9 @@ app.get('/user', function(req, res) {
         console.log(oauth_user.nickname);
     });
   });
+  api.getUserByCode(code, function (err, result) {
+    console.info("result :" + result);
+  });
  
   res.end("success");
 })
