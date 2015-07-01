@@ -63,11 +63,12 @@ app.get('/user', function(req, res) {
     var openid = result.data.openid;
     console.info("accessToken:" + accessToken);
     console.info("openid:" + openid);
-  });
-  client.getUser('openid', function (err, result) {
+     client.getUser(openid, function (err, result) {
     var userInfo = result;
      console.info("userInfo:" + userInfo);
   });
+  });
+ 
   res.end("success");
 })
 
