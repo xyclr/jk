@@ -60,8 +60,15 @@ app.get('/user', function(req, res) {
    var code = req.query.code;
    var str = "";
   client.getAccessToken(code, function (err, result) {
+   
     var accessToken = result.data.access_token;
     var openid = result.data.openid;
+    client.refreshAccessToken(accessToken,function(err,result){
+      openid = result.data.openid;
+      accessToken = result.data.access_token;
+      console.info("re :" +accessToken);
+      console.info("re :" +openid);
+    })
     console.info("accessToken:" + accessToken);
     console.info("openid:" + openid);
     str += accessToken + "|" + openid;
