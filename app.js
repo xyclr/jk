@@ -62,9 +62,7 @@ app.get('/', function(req, res) {
 
 app.get('/user', function(req, res) {
   
-  getToken(function(err,result){
-    console.info(result);
-  })
+ 
   function getToken(cb) {
     var tokenUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appId=' + 'wxc5709f2ac2454001' + '&secret=' + 'c6d27018801ac6e11698825a77dabe4d';
     request.get(tokenUrl, function(error, response, body) {
@@ -91,11 +89,22 @@ app.get('/user', function(req, res) {
     var openid = result.data.openid;
     console.info("accessToken:" + accessToken);
     console.info("openid:" + openid);
-     client.getUser(openid, function (err, result) {
-        console.log('use weixin api get user: '+ err)
-        console.info(result);
-        var oauth_user = result;
+    
+    getToken(function(err,result){
+      console.info(result);
+      request.get('https://api.weixin.qq.com/cgi-bin/user/info?access_token=' + result + '&openid=' + openid, function(error, response, body) {
+      if (error) {
+        cb('getToken error', error);
+      }
+      else {
+        try {
+          console.info(body)
+        }
+        catch (e) {
+        }
+      }
     });
+    })
   });
   
  
