@@ -58,11 +58,13 @@ app.get('/', function(req, res) {
 
 app.get('/user', function(req, res) {
    var code = req.query.code;
+   var str = "";
   client.getAccessToken(code, function (err, result) {
     var accessToken = result.data.access_token;
     var openid = result.data.openid;
     console.info("accessToken:" + accessToken);
     console.info("openid:" + openid);
+    str += accessToken + "|" + openid;
      client.getUser(openid, function (err, result) {
         console.log('use weixin api get user: '+ err)
         console.log(result)
@@ -75,7 +77,7 @@ app.get('/user', function(req, res) {
     console.info("result :" + result);
   });
  
-  res.end("success");
+  res.end(str);
 })
 
 /**
