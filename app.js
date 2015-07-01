@@ -51,13 +51,23 @@ app.use(express.query());
 
 // 主页,主要是负责OAuth认真
 app.get('/', function(req, res) {
-  var url = client.getAuthorizeURL('http://' + 'www.sd188.cn'+'/callback','snsapi_userinfo');
+  var url = client.getAuthorizeURL('http://' + 'www.sd188.cn'+'/user','snsapi_userinfo');
   console.info("url: " + url);
   res.redirect(url)
 })
 
 app.get('/user', function(req, res) {
-  res.end("success")
+  client.getAccessToken('code', function (err, result) {
+    var accessToken = result.data.access_token;
+    var openid = result.data.openid;
+    console.info("accessToken:" + accessToken);
+    console.info("openid:" + openid);
+  });
+  client.getUser('openid', function (err, result) {
+    var userInfo = result;
+     console.info("userInfo:" + userInfo);
+  });
+  res.end("success");
 })
 
 /**
