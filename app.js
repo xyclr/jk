@@ -60,7 +60,7 @@ app.get('/user', function(req, res) {
    var code = req.query.code;
    console.info("code:" + code);
   client.getAccessToken(code, function (err, result) {
-   
+      console.dir(result);
      var accessToken = result.data.access_token;
     var openid = result.data.openid;
     console.info("accessToken:" + accessToken);
