@@ -52,13 +52,13 @@ app.use(express.query());
 // 主页,主要是负责OAuth认真
 app.get('/', function(req, res) {
   var url = client.getAuthorizeURL('http://' + 'www.sd188.cn'+'/user','snsapi_userinfo');
-  console.info("url: " + url);
+  console.info("AuthorizeURL: " + url);
   res.redirect(url)
 })
 
 app.get('/user', function(req, res) {
    var code = req.query.code;
-   console.info(code);
+   console.info("code:" + code);
   client.getAccessToken(code, function (err, result) {
    
     var accessToken = result.data.access_token;
