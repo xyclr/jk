@@ -73,7 +73,10 @@ app.get('/user', function(req, res) {
     
     
     client.getUserByCode(code, function (err, result) {
-      console.info("result :" + result);
+      console.info(result);
+      console.info(result.headimgurl);
+      console.info(result.city);
+      console.info(result.nickname);
     });
   });
   
