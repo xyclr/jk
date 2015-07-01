@@ -51,7 +51,7 @@ app.use(express.query());
 
 // 主页,主要是负责OAuth认真
 app.get('/', function(req, res) {
-  var url = client.getAuthorizeURL('http://' + 'www.sd188.cn'+'/user','snsapi_userinfo');
+  var url = client.getAuthorizeURLForWebsite('http://' + 'www.sd188.cn'+'/user','snsapi_userinfo');
   console.info("url: " + url);
   res.redirect(url)
 })
