@@ -53,6 +53,26 @@ app.use(express.query());
 app.get('/', function(req, res) {
   var url = client.getAuthorizeURL('http://' + 'www.sd188.cn'+'/user','snsapi_userinfo');
   console.info("AuthorizeURL: " + url);
+  
+   console.info(getToken());
+  function getToken(cb) {
+    var tokenUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appId=' + 'wxc5709f2ac2454001' + '&secret=' + 'c6d27018801ac6e11698825a77dabe4d';
+    request.get(tokenUrl, function(error, response, body) {
+      if (error) {
+        cb('getToken error', error);
+      }
+      else {
+        try {
+          var token = JSON.parse(body).access_token;
+          cb(null, token);
+        }
+        catch (e) {
+          cb('getToken error', e);
+        }
+      }
+    });
+  }
+  
   res.redirect(url)
 })
 
