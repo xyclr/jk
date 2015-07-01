@@ -65,11 +65,7 @@ app.get('/user', function(req, res) {
     var openid = result.data.openid;
     console.info("accessToken:" + accessToken);
     console.info("openid:" + openid);
-     client.getUser(openid, function (err, result) {
-        console.log('use weixin api get user: '+ err)
-        console.info(result);
-        var oauth_user = result;
-    });
+ 
     
     
     client.getUserByCode(code, function (err, result) {
