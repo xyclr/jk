@@ -40,13 +40,13 @@ http.createServer(app).listen(app.get('port'), function(){
 var wechat = require('wechat');
 var config = {
     token: 'a23mnE1mgJvN2E7PEMgJg4Z37JZL4Eww',
-    appid: 'wxc5709f2ac2454001',
-    encodingAESKey: 'iTCKlJ8OPreLf8V791A7VLrDXcng6EUvFni6JAc53f9'
+    appid: 'wx0dc4996a4c1b3f2a',
+    encodingAESKey: 'xEXUgN5t41h0rlGOAIdvcRYv6lnWb5OQycspp7CwWNk'
 };
 
 
 var OAuth = require('wechat-oauth');
-var client = new OAuth('wxc5709f2ac2454001', 'c6d27018801ac6e11698825a77dabe4d');
+var client = new OAuth('wx0dc4996a4c1b3f2a', '1c33d19116ae8668de781a9ac108ca87');
 
 app.use(express.query());
 
