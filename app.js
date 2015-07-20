@@ -28,8 +28,8 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-/*app.get('/', routes.index);
- app.get('/users', user.list);*/
+app.use(app.router);
+routes(app);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
@@ -61,11 +61,6 @@ app.get('/', function(req, res) {
 })
 
 app.get('/user', function(req, res) {
-
-
-
-
-
     function getToken(cb) {
         var tokenUrl = 'https:\/\/api.weixin.qq.com\/cgi-bin\/token?grant_type=client_credential&appId=' + 'wxc5709f2ac2454001' + '&secret=' + 'c6d27018801ac6e11698825a77dabe4d';
         request.get(tokenUrl, function(error, response, body) {
@@ -98,22 +93,6 @@ app.get('/user', function(req, res) {
             console.info(result);
             var oauth_user = result;
         });
-
-        /*getToken(function(err,result){
-            console.info(result);
-            request.get('https://api.weixin.qq.com/cgi-bin/user/info?access_token=' + result + '&openid=' + openid, function(error, response, body) {
-                if (error) {
-                    cb('getToken error', error);
-                }
-                else {
-                    try {
-                        console.info(body)
-                    }
-                    catch (e) {
-                    }
-                }
-            });
-        })*/
     });
 
 
