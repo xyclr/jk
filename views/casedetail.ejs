@@ -1,0 +1,53 @@
+<%- include header %>
+<body>
+<header class="titlebar">
+  <a class="btn-back" href="/case"><i class="ico ico-back"></i></a>
+  <span class="title">活动详情</span>
+</header>
+<div class="main">
+  <div class="p-d-info">
+    <div class="p-d-img">
+      <img src="<%= post.thumb %>">
+    </div>
+    <div class="p-d-name">
+      <%= post.title %>
+    </div>
+
+    <ul class="p-d-extra">
+      <li><span class="dd">项目时间：</span><span class="dt"><%= post.caseinfo[2] %></span></li>
+      <li><span class="dd">目标：</span><span class="dt"><%= post.caseinfo[3] %></span></li>
+      <li><span class="dd">项目执行机构：：</span><span class="dt"><%- post.caseinfo[0] %></span></li>
+      <li><span class="dd">善款接受机构：</span><span class="dt"><%- post.caseinfo[1] %></span></li>
+    </ul>
+
+    <div class="p-d-detail">
+      <%- post.post %>
+    </div>
+  </div>
+
+  <div class="p-d-comments">
+    <div class="hd"><h3>爱心留言</h3><a href="/comment/<%= post._id %>" class="comments">留言</a></div>
+    <div class="bd">
+      <% post.comment.forEach(function (doc) { %>
+      <div class="item">
+        <div class="usr-img">
+          <img src="/res/logo.png" alt=""/>
+        </div>
+        <div class="usr-info">
+          <div class="usr-name"><%= doc.name %></div>
+          <div class="p-d-comments-cnt"><%= doc.comment %></div>
+        </div>
+      </div>
+      <% }) %>
+  </div>
+
+
+</div>
+
+<footer class="cart">
+  <a href="javascript:;" class="btn-addtocart">立即关注</a>
+  <a href="javascript:;" class="btn-buy">支持10元</a>
+</footer>
+
+</body>
+</html>

@@ -1,3 +1,10 @@
+var settings = require('../settings');
+var Post = require('../models/post.js');
+var Comment = require('../models/comment.js');
+
+
+
+
 var wechat = require('wechat');
 var config = {
     token: 'a23mnE1mgJvN2E7PEMgJg4Z37JZL4Eww',
@@ -6,8 +13,8 @@ var config = {
 };
 
 
-var OAuth = require('wechat-oauth');
-var client = new OAuth('wx0dc4996a4c1b3f2a', '1c33d19116ae8668de781a9ac108ca87');
+/*var OAuth = require('wechat-oauth');
+var client = new OAuth('wx0dc4996a4c1b3f2a', '1c33d19116ae8668de781a9ac108ca87');*/
 
 
 
@@ -56,5 +63,59 @@ module.exports = function (app) {
     
     
         res.end("success");
+    })
+
+    app.get('/case', function(req, res) {
+        Post.getArchive(function (err, posts) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('/');
+            }
+            res.render('case', {
+                title: '存档',
+                posts: posts
+            });
+        });
+    })
+
+    app.get('/p/:_id', function(req, res){
+        Post.getOne(req.params._id, function (err, post) {
+            if (err) {
+                return res.redirect('/');
+            }
+            res.render('casedetail', {
+                title: post.title,
+                post: post
+            });
+        });
+    });
+
+    app.get('/comment/:_id', function (req, res) {
+        Post.getOne(req.params._id, function (err, post) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('/');
+            }
+            res.render('comment', {
+                title: post.title
+            });
+        });
+    });
+
+    app.post('/comment/:_id', function (req, res) {
+        var _id = req.params._id;
+        var newComment = new Comment(req.body.name,req.body.comment);
+        newComment.save(_id,function (err) {
+            if (err) {
+                return res.redirect('back');
+            }
+            res.redirect('/p/' + _id);
+        });
+    });
+
+    app.get('/my', function(req, res) {
+        res.render('my', {
+            title: '个人中心'
+        });
     })
 }
