@@ -140,6 +140,7 @@ module.exports = function (app) {
     });
 
     app.get('/my', function(req, res) {
+        console.info(req.session.wuser);
         res.render('my', {
             title: '个人中心',
              wuser: req.session.wuser,
