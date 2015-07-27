@@ -4,6 +4,7 @@
 <header class="header clearfix" style="display:none;" >
 </header>
 <div class="main">
+
   <!-- 焦点图 [[ -->
   <section class="slide">
     <div id="focus" class="focus">
@@ -13,34 +14,20 @@
       <div class="bd">
         <div class="tempWrap">
           <ul id="top_jpg">
+            <% banner.forEach(function (doc) { %>
             <li>
-              <a href="#"><img src="http://content.shubaby.com/files/managers/2015/6/5/6af2fcacdeab2cc015f79a5d329c3298.jpg"></a>
+              <a href="/p/<%= doc._id %>"><img src="<%= doc.thumb %>"></a>
               <div class="info">
-                <h3>《爸爸的视界》公益摄影展</h3>
-                <p>“为独一无二的他，一起来，做一件绝无仅有的事情。”“为独一无二的他，一起来，做一件绝无仅有的事情。”</p>
+                <h3> <%= doc.title %></h3>
+                <p> <%- doc.post %>”</p>
               </div>
             </li>
-            <li>
-              <a href="#"><img src="/res/DE6376FD3E830EE669AA01511AB8744.jpg"></a>
-              <div class="info">
-                <h3>《爸爸的视界》公益摄影展</h3>
-                <p>“为独一无二的他，一起来，做一件绝无仅有的事情。”“为独一无二的他，一起来，做一件绝无仅有的事情。”</p>
-              </div>
-            </li>
-            <li>
-              <a href="#"><img src="/res/9AB5656A7E3BE39F63699865595FDC7A.jpg"></a>
-              <div class="info">
-                <h3>《爸爸的视界》公益摄影展</h3>
-                <p>“为独一无二的他，一起来，做一件绝无仅有的事情。”“为独一无二的他，一起来，做一件绝无仅有的事情。”</p>
-              </div>
-            </li>
-
+            <% }) %>
           </ul>
         </div>
       </div>
     </div>
   </section>
-
   <section class="floor">
     <div class="bd">
       <% posts.forEach(function (doc) { %>
