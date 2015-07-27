@@ -11,7 +11,7 @@ var wuserSchema = new mongoose.Schema({
   country: String,
   sex: Number
 }, {
-  collection: 'users'
+  collection: 'wusers'
 });
 
 var wuserModel = mongoose.model('WUser', wuserSchema);
