@@ -1,11 +1,7 @@
-<%- include header %>
- <% wuser.forEach(function (doc) { %>
-  <%= doc %>
- <% }) %>
 <div class="main usr">
   <div class="item profile">
-    <div class="img-box"><img src="./res/logo.png" alt=""/></div>
-    <span class="name">《爸爸的视界》公益摄影展</span>
+    <div class="img-box"><img src="<%= wuser.headimgurl %>" alt=""/></div>
+    <span class="name"><%= wuser.nickname %></span>
     <span class="more"></span>
   </div>
 
