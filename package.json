@@ -10,6 +10,8 @@
     "ejs": "*",
     "mongoose": "*",
     "wechat" : "*",
-    "wechat-oauth" : "*"
+    "wechat-oauth" : "*",
+    "mongodb" : "*",
+    "connect-mongo" : "*"
   }
 }

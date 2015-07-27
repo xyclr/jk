@@ -1,6 +1,7 @@
 var settings = require('../settings');
 var Post = require('../models/post.js');
 var Comment = require('../models/comment.js');
+var WUser = require('../models/wuser.js');
 
 
 
@@ -13,8 +14,8 @@ var config = {
 };
 
 
-/*var OAuth = require('wechat-oauth');
-var client = new OAuth('wx0dc4996a4c1b3f2a', '1c33d19116ae8668de781a9ac108ca87');*/
+var OAuth = require('wechat-oauth');
+var client = new OAuth('wx0dc4996a4c1b3f2a', '1c33d19116ae8668de781a9ac108ca87');
 
 
 
@@ -44,26 +45,55 @@ module.exports = function (app) {
                 }
             });
         }
-    
         var code = req.query.code;
-        console.info("code:" + code);
         client.getAccessToken(code, function (err, result) {
-            console.dir(result);
             var accessToken = result.data.access_token;
             var openid = result.data.openid;
-            console.info("accessToken:" + accessToken);
-            console.info("openid:" + openid);
-    
-            client.getUser(openid, function (err, result) {
-                console.log('use weixin api get user: '+ err)
-                console.info(result);
-                var oauth_user = result;
-            });
+            console.log('token=' + accessToken);
+            console.log('openid=' + openid);
+            WUser.get(openid,function(){
+
+                client.getUser(openid, function (err, wuser) {
+                    console.log('use weixin api get user: '+ err)
+                    console.info(wuser);
+                    if(err || wuser == null){
+                        console.log('user is not exist.')
+                        client.getUser(openid, function (err, result) {
+                            console.log('use weixin api get user: '+ err)
+                            console.log(result)
+
+                            var _user = new WUser({
+                                openid: result.openid,
+                                nickname: result.nickname,
+                                headimgurl: result.headimgurl,
+                                city: result.city,
+                                province: result.city,
+                                country: result.country,
+                                sex: result.sex
+                            });
+
+                            _user.save(function(err, wuser) {
+                                if (err) {
+                                    console.log('User save error ....' + err);
+                                } else {
+                                    console.log('User save sucess ....' + err);
+                                    req.session.wuser = wuser;
+                                    res.redirect('/case');
+                                }
+                            });
+
+                        });
+                    } else {
+                        console.info("user exist");
+                        res.redirect('/case');
+                    }
+                });
+            })
+
         });
-    
-    
         res.end("success");
-    })
+    });
+
 
     app.get('/case', function(req, res) {
         Post.getArchive(function (err, posts) {
