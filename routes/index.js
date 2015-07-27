@@ -13,8 +13,8 @@ var config = {
 };
 
 
-/*var OAuth = require('wechat-oauth');
-var client = new OAuth('wx0dc4996a4c1b3f2a', '1c33d19116ae8668de781a9ac108ca87');*/
+var OAuth = require('wechat-oauth');
+var client = new OAuth('wx0dc4996a4c1b3f2a', '1c33d19116ae8668de781a9ac108ca87');
 
 
 
