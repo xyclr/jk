@@ -29,14 +29,14 @@ function Post(title,tags, post,thumb,caseinfo) {
 
 module.exports = Post;
 
-//»ñÈ¡Ò»ÆªÎÄÕÂ
+//è·å–ä¸€ç¯‡æ–‡ç« 
 Post.getOne = function(_id, callback) {
     postModel.findOne({"_id": new ObjectID(_id)}, function (err, doc) {
         if (err) {
             return callback(err);
         }
         if (doc) {
-            //Ã¿·ÃÎÊ 1 ´Î£¬pv ÖµÔö¼Ó 1
+            //æ¯è®¿é—® 1 æ¬¡ï¼Œpv å€¼å¢åŠ  1
             postModel.update({"_id": new ObjectID(_id)}, {
                 $inc: {"extra.pv": 1}
             }, {
@@ -45,13 +45,13 @@ Post.getOne = function(_id, callback) {
                 console.info(err)
             });
 
-            callback(null, doc);//·µ»Ø²éÑ¯µÄÒ»ÆªÎÄÕÂ
+            callback(null, doc);//è¿”å›æŸ¥è¯¢çš„ä¸€ç¯‡æ–‡ç« 
         }
     });
 
 };
 
-//·µ»ØËùÓĞÎÄÕÂ´æµµĞÅÏ¢
+//è¿”å›æ‰€æœ‰æ–‡ç« å­˜æ¡£ä¿¡æ¯
 Post.getArchive = function (callback) {
     postModel.find({},{
         "name": 1,
@@ -59,6 +59,21 @@ Post.getArchive = function (callback) {
         "title": 1,
         "thumb" : 1,
         "caseinfo" : 1,
+        "post" : 1
+    }, {},function (err, docs) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, docs);
+    });
+};
+
+Post.getBanner = function (callback) {
+    postModel.find({ 'posi': "1" },{
+        "name": 1,
+        "time": 1,
+        "title": 1,
+        "thumb" : 1,
         "post" : 1
     }, {},function (err, docs) {
         if (err) {
