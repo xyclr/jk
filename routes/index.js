@@ -92,15 +92,25 @@ module.exports = function (app) {
 
 
     app.get('/case', function(req, res) {
+
         Post.getArchive(function (err, posts) {
             if (err) {
                 req.flash('error', err);
                 return res.redirect('/');
             }
-            res.render('case', {
-                title: '存档',
-                posts: posts
+
+            Post.getBanner(function (err, banner) {
+                if (err) {
+                    req.flash('error', err);
+                    return res.redirect('/');
+                }
+                res.render('case', {
+                    title: '存档',
+                    posts: posts,
+                    banner: banner
+                });
             });
+
         });
     })
 
