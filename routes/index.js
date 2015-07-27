@@ -51,43 +51,40 @@ module.exports = function (app) {
             var openid = result.data.openid;
             console.log('token=' + accessToken);
             console.log('openid=' + openid);
-            WUser.get(openid,function(){
+            WUser.get(openid,function(err, wuser){
+                console.log('use weixin api get user: '+ err)
+                console.info(wuser);
+                if(err || wuser == null){
+                    console.log('user is not exist.')
+                    client.getUser(openid, function (err, result) {
+                        console.log('use weixin api get user: '+ err)
+                        console.log(result)
 
-                client.getUser(openid, function (err, wuser) {
-                    console.log('use weixin api get user: '+ err)
-                    console.info(wuser);
-                    if(err || wuser == null){
-                        console.log('user is not exist.')
-                        client.getUser(openid, function (err, result) {
-                            console.log('use weixin api get user: '+ err)
-                            console.log(result)
-
-                            var _user = new WUser({
-                                openid: result.openid,
-                                nickname: result.nickname,
-                                headimgurl: result.headimgurl,
-                                city: result.city,
-                                province: result.city,
-                                country: result.country,
-                                sex: result.sex
-                            });
-
-                            _user.save(function(err, wuser) {
-                                if (err) {
-                                    console.log('User save error ....' + err);
-                                } else {
-                                    console.log('User save sucess ....' + err);
-                                    req.session.wuser = wuser;
-                                    res.redirect('/case');
-                                }
-                            });
-
+                        var _user = new WUser({
+                            openid: result.openid,
+                            nickname: result.nickname,
+                            headimgurl: result.headimgurl,
+                            city: result.city,
+                            province: result.city,
+                            country: result.country,
+                            sex: result.sex
                         });
-                    } else {
-                        console.info("user exist");
-                        res.redirect('/case');
-                    }
-                });
+
+                        _user.save(function(err, wuser) {
+                            if (err) {
+                                console.log('User save error ....' + err);
+                            } else {
+                                console.log('User save sucess ....' + err);
+                                req.session.wuser = wuser;
+                                res.redirect('/case');
+                            }
+                        });
+
+                    });
+                } else {
+                    console.info("user exist");
+                    res.redirect('/case');
+                }
             })
 
         });
