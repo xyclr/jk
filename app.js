@@ -14,7 +14,7 @@ var MongoStore = require('connect-mongo')(express);
 
 var app = express();
 
-
+app.use(express.cookieParser());
 app.use(express.session({
     secret: settings.cookieSecret,
     key: settings.db,//cookie name
