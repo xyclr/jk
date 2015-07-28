@@ -46,8 +46,8 @@
 </div>
 
 <footer class="cart">
-  <%-  isFav %>  
-  <%  if(isFav =="true") { %>  
+  
+  <%  if( <%- isFav %> =="true") { %>  
      <a href="javascript:;" class="btn-remove-fav" id="setFav">取消关注</a>
   <% } else {%>
    <a href="javascript:;" class="btn-add-fav" id="setFav">立即关注</a>
