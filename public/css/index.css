@@ -25,6 +25,7 @@
 .p-d-comments .usr-img img{width:50px;height:50px;position: absolute;left:10px;top:10px;}
 .p-d-comments .usr-info {margin-left:70px;}
 .p-d-comments-cnt {color:#999;}
+.p-d-detail .bd  {margin:10px;}
 
 .comment .hd {font-size:14px;color:#fff;padding:10px 0;text-align: center;background: #faa500;font-size:18px;font-family: "微软雅黑"}
 .comment .bd {padding:20px;}
