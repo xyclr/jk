@@ -94,7 +94,7 @@ module.exports = function (app) {
     app.post('/setFav/:_id', function(req, res) {
         var _id = req.params._id;
         var arg = url.parse(req.url).query;
-        console.info(arg.action);
+        console.info(arg);
         WUser.setFav(req.session.wuser.openid,_id,arg.action,function(err){
             if (err) {
                 return res.redirect('back');
