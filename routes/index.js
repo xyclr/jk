@@ -92,13 +92,15 @@ module.exports = function (app) {
 
     app.post('/setFav/:_id', function(req, res) {
         var _id = req.params._id;
-        console.info("openid:" + req.session.wuser.openid)
-        WUser.setFav(req.session.wuser.openid,_id,function(err){
+        var arg = url.parse(req.url).query;
+        console.info(arg.action);
+        WUser.setFav(req.session.wuser.openid,_id,arg.action,function(err){
             if (err) {
                 return res.redirect('back');
             }
             res.end("success");
         })
+       
     });
 
 
