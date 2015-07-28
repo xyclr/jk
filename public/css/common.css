@@ -81,7 +81,7 @@ footer.cart { position:fixed; z-index:1000; bottom:0; width:100%;text-align: cen
 footer.cart a { display:inline-block; margin-right:10px; }
 footer.cart .btn-buy, footer.cart .btn-addtocart { width:100px; height:25px; text-align:center; line-height:25px; font-size:1rem; -webkit-border-radius:5px; border-radius:5px; border-style:solid; border-width:1px; background-color:#fff; box-sizing:border-box; }
 footer.cart .btn-buy { border-color:#ff8080; background-color:#ff8080; color:#fff; }
-footer.cart .btn-addtocart { border-color:#faa500; background-color:#faa500; color:#fff; }
+footer.cart .btn-add-fav,footer.cart .btn-remove-fav  { border-color:#faa500; background-color:#faa500; color:#fff; }
 
 .p-d-info {background:#fff;overflow: hidden;}
 .p-d-info .p-d-img img {width:100%;}
