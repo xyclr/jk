@@ -138,13 +138,20 @@ module.exports = function (app) {
             if (err) {
                 return res.redirect('/');
             }
-            console.info("user");
-            console.info(req.session.wuser);
-            res.render('casedetail', {
-                user : req.session.wuser,
-                title: post.title,
-                post: post
+            WUser.get(req.session.wuser.openid,function(err, wuser){
+                var isFav = false;
+                wuser.fav.forEach(function(i){
+                    if(i === _id) isFav = true;
+                });
+                console.info("isFav:" + isFav);
+                 res.render('casedetail', {
+                    user : req.session.wuser,
+                    isFav : isFav,
+                    title: post.title,
+                    post: post
+                });
             });
+           
         });
     });
 
