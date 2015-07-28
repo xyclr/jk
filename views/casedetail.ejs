@@ -46,19 +46,31 @@
 </div>
 
 <footer class="cart">
-  <a href="javascript:;" class="btn-addtocart">立即关注</a>
+  <a href="javascript:;" class="btn-add-fav">立即关注</a>
   <a href="javascript:;" class="btn-buy">支持10元</a>
 </footer>
  <script>
    alert("succsee");
     $(function(){
-      $(".btn-addtocart").click(function(){
+      $(".btn-add-fav").click(function(){
         $.ajax({
           type :"POST",
-          url: "http://" + window.location.host + "/setFav/" + window.location.pathname.split('/')[2],
+          url: "http://" + window.location.host + "/setFav/" + window.location.pathname.split('/')[2] +"&action=add",
           success: function(data){
-            alert("data:" + data);
-            alert("succsee");
+            alert("关注成功！");
+            $(".btn-addtocart").removeClass("btn-add-fav").addClass("btn-remove-fav").html("取消关注");
+          }
+        });
+        return false;
+      });
+      
+      $(".btn-remove-fav").click(function(){
+        $.ajax({
+          type :"POST",
+          url: "http://" + window.location.host + "/setFav/" + window.location.pathname.split('/')[2] +"&action=remove",
+          success: function(data){
+            alert("取消成功！");
+            $(".btn-addtocart").addClass("btn-add-fav").removeClass("btn-remove-fav").html("立即关注");
           }
         });
         return false;
