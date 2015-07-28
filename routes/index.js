@@ -70,8 +70,7 @@ module.exports = function (app) {
                             city: result.city,
                             province: result.city,
                             country: result.country,
-                            sex: result.sex,
-                            fav: result.fav
+                            sex: result.sex
                         });
 
                         _user.save(function(err, wuser) {
