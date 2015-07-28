@@ -139,6 +139,7 @@ module.exports = function (app) {
                 return res.redirect('/');
             }
             res.render('casedetail', {
+                user : req.session.wuser,
                 title: post.title,
                 post: post
             });
