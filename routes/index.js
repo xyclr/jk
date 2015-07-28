@@ -20,13 +20,13 @@ var client = new OAuth('wx0dc4996a4c1b3f2a', '1c33d19116ae8668de781a9ac108ca87')
 
 
 module.exports = function (app) {
-   // 主页,主要是负责OAuth认真
+    // 主页,主要是负责OAuth认真
     app.get('/', function(req, res) {
         var url = client.getAuthorizeURL('http://www.sd188.cn/user','','snsapi_userinfo');
         console.info("AuthorizeURL: " + url);
         res.redirect(url)
     })
-    
+
     app.get('/user', function(req, res) {
         function getToken(cb) {
             var tokenUrl = 'https:\/\/api.weixin.qq.com\/cgi-bin\/token?grant_type=client_credential&appId=' + 'wxc5709f2ac2454001' + '&secret=' + 'c6d27018801ac6e11698825a77dabe4d';
@@ -89,10 +89,11 @@ module.exports = function (app) {
 
         });
     });
-    
+
     app.post('/setFav/:_id', function(req, res) {
         var _id = req.params._id;
-        console.info("session:" +req.session.wuser);
+        console.info("sesson:");
+        console.info(req.session.wuser);
         WUser.setFav(req.session.wuser.openid,_id,function(err){
             if (err) {
                 return res.redirect('back');
@@ -103,7 +104,7 @@ module.exports = function (app) {
 
 
     app.get('/case', function(req, res) {
-       console.info("session:" +req.session.wuser);
+        
         Post.getArchive(function (err, posts) {
             if (err) {
                 req.flash('error', err);
@@ -126,7 +127,7 @@ module.exports = function (app) {
     })
 
     app.get('/p/:_id', function(req, res){
-        console.info("session:" +req.session.wuser);
+        
         Post.getOne(req.params._id, function (err, post) {
             if (err) {
                 return res.redirect('/');
@@ -162,10 +163,10 @@ module.exports = function (app) {
     });
 
     app.get('/my', function(req, res) {
-        console.info("session:" +req.session.wuser);
+        
         res.render('my', {
             title: '个人中心',
-             wuser: req.session.wuser,
+            wuser: req.session.wuser
         });
     })
 }
