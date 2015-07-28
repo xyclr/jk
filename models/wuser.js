@@ -64,7 +64,7 @@ WUser.get = function(openid, callback) {
 };
 
 //设置关注
-WUser.setFav = function(openid,_id,type callback) {
+WUser.setFav = function(openid,_id,type, callback) {
   if(type == "add") {
     wuserModel.update({openid: openid},{
       $push: {"fav": _id}
