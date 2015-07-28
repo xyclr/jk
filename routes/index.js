@@ -133,8 +133,8 @@ module.exports = function (app) {
     })
 
     app.get('/p/:_id', function(req, res){
-        
-        Post.getOne(req.params._id, function (err, post) {
+        var _id = req.params._id;
+        Post.getOne(_id, function (err, post) {
             if (err) {
                 return res.redirect('/');
             }
