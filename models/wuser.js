@@ -9,7 +9,8 @@ var wuserSchema = new mongoose.Schema({
   city: String,
   province: String,
   country: String,
-  sex: Number
+  sex: Number,
+  fav: []
 }, {
   collection: 'wusers'
 });
