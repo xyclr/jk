@@ -86,7 +86,6 @@ footer.cart .btn-addtocart { border-color:#faa500; background-color:#faa500; col
 .p-d-info {background:#fff;overflow: hidden;}
 .p-d-info .p-d-img img {width:100%;}
 .p-d-info .p-d-name {color: #00b38a; font-weight: normal; border-left: 5px solid #00b38a; font-size: 14px; line-height: 14px;padding: 0 0 0px 10px;margin:10px;}
-.p-d-detail {margin:0 10px 10px 10px;font-size:12px;color:#666;}
 .p-d-extra {font-size: 12px; background: #fff; padding: 10px; margin-top: 10px; display: table; border: 1px solid #ddd; margin: 10px 10px; border-radius: 5px;}
 .p-d-extra li {width:50%;float:left;}
 .p-d-extra .dd {color: #999;}
