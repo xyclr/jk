@@ -49,6 +49,19 @@
   <a href="javascript:;" class="btn-addtocart">立即关注</a>
   <a href="javascript:;" class="btn-buy">支持10元</a>
 </footer>
-
+ <script>
+    $(function(){
+      $(".btn-addtocart").click(function(){
+        $.ajax({
+          type :"POST",
+          url: "http://" + window.location.host + "/setFav/" + window.location.pathname.split('/')[2],
+          success: function(){
+            console.info("succsee");
+          }
+        });
+        return false;
+      })
+    })
+  </script>
 </body>
 </html>
