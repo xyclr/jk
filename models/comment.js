@@ -4,7 +4,8 @@ var ObjectID = require('mongodb').ObjectID;
 
 var commentSchema = new mongoose.Schema({
     name: String,
-    comment: String
+    comment: String,
+    usrimg: String,
 }, {
     collection: 'posts'
 });
@@ -12,9 +13,10 @@ var commentSchema = new mongoose.Schema({
 var commentModel = mongoose.model('Comment', commentSchema);
 
 
-function Comment(name, comment) {
+function Comment(name, comment,headimgurl) {
   this.name = name;
   this.comment = comment;
+  this.headimgurl = headimgurl;
 }
 
 module.exports = Comment;
@@ -34,6 +36,7 @@ Comment.prototype.save = function(_id,callback) {
     var comment = {
         name : this.name,
         time : time,
+        headimgurl : this.headimgurl,
         comment : this.comment
     };
     commentModel.findOne({"_id": new ObjectID(_id)}, function (err, doc) {
