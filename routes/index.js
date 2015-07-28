@@ -3,6 +3,8 @@ var Post = require('../models/post.js');
 var Comment = require('../models/comment.js');
 var WUser = require('../models/wuser.js');
 var url = require('url');
+var querystring = require('querystring');
+
 
 
 
