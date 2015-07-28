@@ -32,7 +32,7 @@
       <% post.comment.forEach(function (doc) { %>
       <div class="item">
         <div class="usr-img">
-          <img src="/res/logo.png" alt=""/>
+          <img src="<%= doc.headimgurl %>" alt=""/>
         </div>
         <div class="usr-info">
           <div class="usr-name"><%= doc.name %></div>
