@@ -169,7 +169,7 @@ module.exports = function (app) {
 
     app.post('/comment/:_id', function (req, res) {
         var _id = req.params._id;
-        var newComment = new Comment(req.body.name,req.body.comment,req.session.wuser.headimgurl);
+        var newComment = new Comment(req.session.wuser.nickname,req.body.comment,req.session.wuser.headimgurl);
         newComment.save(_id,function (err) {
             if (err) {
                 return res.redirect('back');
