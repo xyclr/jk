@@ -92,7 +92,7 @@ module.exports = function (app) {
     
     app.post('/setFav/:_id', function(req, res) {
         var _id = req.params._id;
-        console.info(req.session.wuser);
+        console.info("session:" +req.session.wuser);
         WUser.setFav(req.session.wuser.openid,_id,function(err){
             if (err) {
                 return res.redirect('back');
@@ -103,7 +103,7 @@ module.exports = function (app) {
 
 
     app.get('/case', function(req, res) {
-        console.info(req.session.wuser);
+       console.info("session:" +req.session.wuser);
         Post.getArchive(function (err, posts) {
             if (err) {
                 req.flash('error', err);
@@ -126,7 +126,7 @@ module.exports = function (app) {
     })
 
     app.get('/p/:_id', function(req, res){
-        console.info(req.session.wuser);
+        console.info("session:" +req.session.wuser);
         Post.getOne(req.params._id, function (err, post) {
             if (err) {
                 return res.redirect('/');
@@ -162,7 +162,7 @@ module.exports = function (app) {
     });
 
     app.get('/my', function(req, res) {
-        console.info(req.session.wuser);
+        console.info("session:" +req.session.wuser);
         res.render('my', {
             title: '个人中心',
              wuser: req.session.wuser,
