@@ -1,7 +1,5 @@
 var mongoose = require('./db');
 
-
-
 var wuserSchema = new mongoose.Schema({
   openid: String,
   nickname: String,
