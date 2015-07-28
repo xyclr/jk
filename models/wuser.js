@@ -40,8 +40,7 @@ WUser.prototype.save = function(callback) {
     city: this.city,
     province: this.city,
     country: this.country,
-    sex: this.sex,
-    fav: []
+    sex: this.sex
   };
 
   var newUser = new wuserModel(wuser);
