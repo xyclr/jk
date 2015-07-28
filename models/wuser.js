@@ -74,6 +74,8 @@ WUser.setFav = function(openid,_id,type, callback) {
       }
       if (wuser) {
         callback(null, wuser);//返回查询的一篇文章
+        console.info("add");
+        console.info(wuser);
       }
     });
   } else {
@@ -85,6 +87,8 @@ WUser.setFav = function(openid,_id,type, callback) {
       }
       if (wuser) {
         callback(null, wuser);//返回查询的一篇文章
+         console.info("remove");
+        console.info(wuser);
       }
     });
   }
