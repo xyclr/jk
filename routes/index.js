@@ -103,7 +103,7 @@ module.exports = function (app) {
 
 
     app.get('/case', function(req, res) {
-
+        console.info(req.session.wuser);
         Post.getArchive(function (err, posts) {
             if (err) {
                 req.flash('error', err);
@@ -126,6 +126,7 @@ module.exports = function (app) {
     })
 
     app.get('/p/:_id', function(req, res){
+        console.info(req.session.wuser);
         Post.getOne(req.params._id, function (err, post) {
             if (err) {
                 return res.redirect('/');
