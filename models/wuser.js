@@ -64,15 +64,29 @@ WUser.get = function(openid, callback) {
 };
 
 //设置关注
-WUser.setFav = function(openid,_id, callback) {
-  wuserModel.update({openid: openid},{
-    $push: {"fav": _id}
-  },function (err, wuser) {
-    if (err) {
-      return callback(err);
-    }
-    if (wuser) {
-      callback(null, wuser);//返回查询的一篇文章
-    }
-  });
+WUser.setFav = function(openid,_id,type callback) {
+  if(type == "add") {
+    wuserModel.update({openid: openid},{
+      $push: {"fav": _id}
+    },function (err, wuser) {
+      if (err) {
+        return callback(err);
+      }
+      if (wuser) {
+        callback(null, wuser);//返回查询的一篇文章
+      }
+    });
+  } else {
+    wuserModel.update({openid: openid},{
+      $pull: {"fav": _id}
+    },function (err, wuser) {
+      if (err) {
+        return callback(err);
+      }
+      if (wuser) {
+        callback(null, wuser);//返回查询的一篇文章
+      }
+    });
+  }
+ 
 };
