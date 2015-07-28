@@ -61,3 +61,17 @@ WUser.get = function(openid, callback) {
     callback(null, wuser);
   });
 };
+
+//设置关注
+WUser.setFav = function(openid,_id, callback) {
+  wuserModel.update({openid: openid},{
+    $push: {"fav": _id}
+  },function (err, wuser) {
+    if (err) {
+      return callback(err);
+    }
+    if (wuser) {
+      callback(null, wuser);//返回查询的一篇文章
+    }
+  });
+};
