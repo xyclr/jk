@@ -97,7 +97,7 @@ module.exports = function (app) {
             if (err) {
                 return res.redirect('back');
             }
-            res.redirect('/p/' + _id);
+            res.end("success");
         })
     });
 
