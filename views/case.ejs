@@ -18,8 +18,8 @@
             <li>
               <a href="/p/<%= doc._id %>"><img src="<%= doc.thumb %>"></a>
               <div class="info">
-                <h3> <%= doc.title %></h3>
-                <p> <%= doc.post %>”</p>
+                <h3> <%= doc.title.substring(0,20) %></h3>
+                <p> <%= doc.post.replace(/<\/?[^>]*>/g,'').replace(/[ | ]*\n/g,'\n').substring(0,60)%></p>
               </div>
             </li>
             <% }) %>
@@ -36,7 +36,7 @@
           <div class="thumb"><img src="<%= doc.thumb %>"></div>
           <div class="info">
             <p class="p-detail">
-              <%= doc.title %>
+              <%= doc.title.substring(0,20) %>
             </p>
           </div>
           <span class="btn-fav"></span>
@@ -52,7 +52,7 @@
 </div>
 
 <footer class="nav">
-  <a class="item selected" href="/" id="footer-ico-home" >
+  <a class="item selected" href="/case" id="footer-ico-home" >
     <span class="ico ico-home"></span>
     <span class="txt">公益中心</span>
   </a>

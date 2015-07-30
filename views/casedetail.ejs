@@ -58,16 +58,21 @@
     $(function(){
       $("#setFav").click(function(){
         var url = "http://" + window.location.host + "/setFav/" + window.location.pathname.split('/')[2];
+        console.info(url);
         if($(this).hasClass("btn-add-fav")){
             $.ajax({
               type :"POST",
               url: url +"?action=add",
               success: function(data){
-                alert("关注成功！");
-                $(".btn-add-fav").removeClass("btn-add-fav").addClass("btn-remove-fav").html("取消关注");
+                if(data == "success") {
+                  alert("关注成功！") ;
+                  $(".btn-add-fav").removeClass("btn-add-fav").addClass("btn-remove-fav").html("取消关注");
+                } else {
+                  alert("关注失败！请在微信客户端打开链接") ;
+                }
               }
             });
-            
+
         }else {
           $.ajax({
             type :"POST",

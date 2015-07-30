@@ -58,12 +58,28 @@ Post.getArchive = function (callback) {
         "time": 1,
         "title": 1,
         "thumb" : 1,
-        "caseinfo" : 1,
         "post" : 1
     }, {},function (err, docs) {
         if (err) {
             return callback(err);
         }
+        callback(null, docs);
+    });
+};
+
+Post.favArchive = function (fav,callback) {
+    postModel.find({"_id":{"$in":fav}},{
+        "name": 1,
+        "time": 1,
+        "title": 1,
+        "thumb" : 1,
+        "post" : 1
+    }, {},function (err, docs) {
+        console.info(docs);
+        if (err) {
+            return callback(err);
+        }
+
         callback(null, docs);
     });
 };

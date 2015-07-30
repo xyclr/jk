@@ -40,7 +40,7 @@ body { height:100%; font-size:1rem; padding:0; margin:0; background-color:#eee; 
 .floor .info {font-size:12px;overflow: hidden}
 .floor .logo {width:30px;height:30px;border-radius:30px;border:10px solid #fff;position: absolute;left:20px;bottom:5px;}
 .floor .p-detail {padding-left:70px;height:20px;overflow: hidden}
-.floor .btn-fav,.floor .btn-faved {width:30px;height:30px;display: block;background:rgba(0,0,0,0.2) url("../images/ico_fav.png") no-repeat;background-size:100% 100%;position: absolute;top:20px;right:20px;border-radius:5px;}
+.floor .btn-fav,.floor .btn-faved {display:none;/*width:30px;height:30px;display: block;background:rgba(0,0,0,0.2) url("../images/ico_fav.png") no-repeat;background-size:100% 100%;position: absolute;top:20px;right:20px;border-radius:5px;*/}
 .floor .btn-faved { }
 
 .ad {width:100%;height:50px;background:#ddd;margin-bottom:10px;line-height:50px;font-size:20px;text-align: center;color:#fff;}
@@ -91,6 +91,7 @@ footer.cart .btn-add-fav,footer.cart .btn-remove-fav  { border-color:#faa500; ba
 .p-d-extra .dd {color: #999;}
 
 .usr .item {width:100%;background:#fff;padding:5px 10px;margin:20px 0;overflow: hidden;font-size:12px;position: relative;}
+.usr .item a  {display: block}
 .usr .profile {padding:10px;height:50px;line-height:50px;margin-top:50px;}
 .usr .profile .name {float:left;margin-left:10px;}
 .usr  .more {position: absolute;top:8px;right:30px;background:url(../images/ico_back.png) no-repeat 0 0;width:10px;height:10px;display: block;background-size: 100% 100%;transform:rotate(180deg);

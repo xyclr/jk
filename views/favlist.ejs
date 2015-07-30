@@ -1,0 +1,28 @@
+<%- include header %>
+<body>
+<header class="titlebar">
+  <a class="btn-back" href="/my"><i class="ico ico-back"></i></a>
+  <span class="title"><%= title %></span>
+</header>
+<div class="main">
+  <section class="floor">
+    <div class="bd">
+      <% posts.forEach(function (doc) { %>
+      <div class="item">
+        <a href="/p/<%= doc._id %>">
+          <div class="thumb"><img src="<%= doc.thumb %>"></div>
+          <div class="info">
+            <p class="p-detail">
+              <%= doc.title.substring(0,20) %>
+            </p>
+          </div>
+          <span class="btn-fav"></span>
+          <img class="logo" src="/res/logo.png" alt=""/>
+        </a>
+      </div>
+      <% }) %>
+    </div>
+  </section>
+</div>
+</body>
+</html>
