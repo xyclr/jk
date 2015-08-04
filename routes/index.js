@@ -131,7 +131,7 @@ module.exports = function (app) {
 
     app.get('/case', function(req, res) {
 
-        /*WUser.get("sdfadfa1231231231",function(err, wuser){
+        WUser.get("sdfadfa1231231231",function(err, wuser){
             if(err || wuser == null){
                 var _user = new WUser({
                     openid: "sdfadfa1231231231",
@@ -151,7 +151,7 @@ module.exports = function (app) {
                     }
                 });
             }
-        })*/
+        })
 
 
 
