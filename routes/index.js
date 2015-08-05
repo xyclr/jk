@@ -2,6 +2,7 @@ var settings = require('../settings');
 var Post = require('../models/post.js');
 var Comment = require('../models/comment.js');
 var WUser = require('../models/wuser.js');
+var Card = require('../models/card.js');
 var url = require('url');
 var querystring = require('querystring');
 
@@ -174,7 +175,34 @@ module.exports = function (app) {
             });
 
         });
-    })
+    });
+
+    app.get('/card', function (req, res) {
+        Card.getArchive(function (err, posts) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('/');
+            }
+            res.render('card', {
+                title: '兑换',
+                posts: posts
+            });
+        });
+    });
+
+    app.get('/card/:_id', function(req, res){
+        Card.getOne(req.params._id, function (err, post) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('/');
+            }
+            res.render('cardarticle', {
+                title: post.title,
+                post: post,
+                user: req.session.user
+            });
+        });
+    });
 
     app.get('/p/:_id', function(req, res){
         var _id = req.params._id;

@@ -1,0 +1,61 @@
+<%- include header %>
+<body>
+<!--头部-->
+<header class="header clearfix" style="display:none;" >
+</header>
+<div class="main">
+  <style>
+    .cart-item {text-align: center;width:45%;padding:10px 2.5%;overflow: hidden;float:left;}
+    .card {border:1px solid #ddd;border-radius: 5px;padding:20px;overflow: hidden;background:#fff}
+    .price {float:left;font-size:20px;line-height:60px;}
+    .card-logo {float:right;width:60px;height:60px;border-radius: 60px;}
+  </style>
+  <% posts.forEach(function (post) { %>
+  <div class="cart-item">
+    <a href="/card/<%= post._id %>">
+    <div class="card">
+      <span class="price">￥ <%= post.price %> </span>
+      <img src="<%- post.thumb %>"  class="card-logo" alt="" />
+    </div>
+    <p style="margin-top:5px;font-size:12px;"><%= post.title %></p>
+    </a>
+  </div>
+  <% }) %>
+</div>
+
+<footer class="nav">
+  <a class="item " href="/case" id="footer-ico-home" >
+    <span class="ico ico-home"></span>
+    <span class="txt">公益中心</span>
+  </a>
+  <a class="item selected" href="/card" id="footer-ico-cart" >
+    <span class="ico ico-search"></span>
+    <span class="txt">兑换</span>
+
+  </a>
+  <a class="item" href="/my" id="footer-ico-user" >
+    <span class="ico ico-user"></span>
+    <span class="txt">我的</span>
+  </a>
+
+
+</footer>
+
+</body>
+</html>
+<script type="text/javascript">
+  $(function(){
+    // 焦点图 flexslider插件
+    TouchSlide({
+      slideCell:"#focus",
+      titCell:".hd ul", 	//开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+      mainCell:".bd ul",
+      effect:"leftLoop",
+      autoPlay:true,		//自动播放
+      autoPage:true, 		//自动分页
+      switchLoad:"_src", 	//切换加载，真实图片路径为"_src"
+      interTime:5000,
+      delayTime:300
+    });
+  });
+</script>
