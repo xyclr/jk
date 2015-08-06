@@ -6,7 +6,7 @@
 @charset "utf-8";
 
 html { height:100%; font-size:16px; }
-body { height:100%; font-size:1rem; padding:0; margin:0; background-color:#eee; font-family:Helvetica; }
+body { height:100%; font-size:1rem; padding:0; margin:0; background-color:#fff; font-family:Helvetica; }
 
 .ico { display:inline-block; }
 .main { padding:0; }
@@ -83,6 +83,22 @@ footer.cart .btn-buy, footer.cart .btn-add-fav,footer.cart .btn-remove-fav { wid
 footer.cart .btn-buy { border-color:#ff8080; background-color:#ff8080; color:#fff; }
 footer.cart .btn-add-fav,footer.cart .btn-remove-fav  { border-color:#faa500; background-color:#faa500; color:#fff; }
 
+/*card*/
+footer.card { position:fixed; z-index:1000; bottom:0; width:100%;text-align: center; border-top:solid 1px #e5e5e5; box-sizing:border-box; padding:10px 0; background-color:#fff; }
+footer.card a { display:inline-block; margin-right:10px; }
+.card-item {text-align: center;width:45%;padding:10px 2.5%;overflow: hidden;float:left;}
+.card {border:1px solid #ddd;border-radius: 5px;padding:10px;overflow: hidden;background:#fff}
+.price {float:left;font-size:20px;line-height:60px;}
+.card-item p {height:20px;overflow: hidden;margin-top:5px;font-size:12px;}
+.card-logo {float:right;width:50px;height:50px;border-radius: 50px;}
+.card-info {text-align: center;padding:20px 0;}
+.card-info p {font-size:16px;color:#000;margin-bottom:10px;}
+.card-info .card-item {padding:10px 26.5%;}
+.user-point {background:#F4DCAF;padding:10px;color:#333;font-size:16px;}
+.user-point em {color:red;padding:0 10px;}
+.card-rule {font-size:14px;color:#333;clear:both;padding:20px;border-top:1px solid #ddd;line-height:20px;}
+.btn-exchange {display:block;width:90%;margin:10px 5%;border-color: #ff8080;background-color: #ff8080;color: #fff; height:35px; text-align:center; line-height:35px; font-size:1rem; -webkit-border-radius:5px; border-radius:5px; border-style:solid; border-width:1px; box-sizing:border-box;}
+.btn-exchange.dis {background: #ddd;color: #999;border: 1px solid #ddd;cursor: default}
 .p-d-info {background:#fff;overflow: hidden;}
 .p-d-info .p-d-img img {width:100%;}
 .p-d-info .p-d-name {color: #00b38a; font-weight: normal; border-left: 5px solid #00b38a; font-size: 14px; line-height: 14px;padding: 0 0 0px 10px;margin:10px;}

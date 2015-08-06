@@ -8,6 +8,8 @@ var wuserSchema = new mongoose.Schema({
   province: String,
   country: String,
   sex: Number,
+  point: Number,
+  card: [],
   fav: []
 }, {
   collection: 'wusers'
@@ -38,7 +40,9 @@ WUser.prototype.save = function(callback) {
     city: this.city,
     province: this.city,
     country: this.country,
-    sex: this.sex
+    sex: this.sex,
+    point : 10000,
+    card : []
   };
 
   var newUser = new wuserModel(wuser);
@@ -91,4 +95,19 @@ WUser.setFav = function(openid,_id,type, callback) {
     });
   }
  
+};
+
+//更新积分
+WUser.setPoint = function(openid,_id,point, callback) {
+  wuserModel.update({openid: openid},{
+    $inc: {"point": -point},
+    $push: {"card": _id}
+  },function (err, wuser) {
+    if (err) {
+      return callback(err);
+    }
+    if (wuser) {
+      callback(null, wuser);
+    }
+  });
 };

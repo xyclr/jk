@@ -1,5 +1,6 @@
 var mongoose = require('./db');
 var ObjectID = require('mongodb').ObjectID;
+var WUser = require('./wuser.js');
 
 
 
@@ -76,59 +77,6 @@ Card.getOne = function(_id, callback) {
 
 };
 
-
-
-//返回原始发表的内容
-Card.edit = function (_id, callback) {
-    cardModel.findOne({"_id": new ObjectID(_id)}, function (err, doc) {
-        if (err) {
-            return callback(err);
-        }
-        if (doc) {
-            callback(null, doc);//返回查询的一篇文章
-        }
-    });
-};
-
-//更新一篇文章及其相关信息
-Card.update = function (_id, title,point, thumb,detail,dtime,num,price,callback) {
-    cardModel.update({
-        "_id": new ObjectID(_id)
-    },{
-        $set: {
-            "title": title,
-            "point": point,
-            "thumb": thumb,
-            "detail": detail,
-            "dtime": dtime,
-            "cnum": num,
-            "price": price
-        }
-    },{
-        upsert : true
-    }, function (err, doc) {
-        if (err) {
-            return callback(err);
-        }
-        if (doc) {
-            callback(null, doc);
-        }
-    });
-
-};
-
-//删除一篇文章
-Card.remove = function (_id, callback) {
-    cardModel.remove({"_id": new ObjectID(_id)}, function (err, doc) {
-        if (err) {
-            return callback(err);
-        }
-        if (doc) {
-            callback(null);
-        }
-    });
-};
-
 //返回所有文章存档信息
 Card.getArchive = function (callback) {
     cardModel.find({},{
@@ -143,18 +91,39 @@ Card.getArchive = function (callback) {
         callback(null, docs);
     });
 };
-
-//返回用户信息
-Card.getUser = function (callback) {
-    cardModel.find({},{
-        "name": 1,
-        "time": 1,
-        "title": 1
-    }, {},function (err, docs) {
+Card.exchange = function(openid,_id,callback){
+    //更新库存
+    cardModel.update({
+        "_id": new ObjectID(_id)
+    },{
+        $inc: {"num": -1}
+    },{
+        upsert : true
+    }, function (err, doc) {
         if (err) {
             return callback(err);
         }
-        callback(null, docs);
+        if (doc) {
+            cardModel.findOne({"_id": _id}, function (err, doc) {
+                if (err) {
+                    return callback(err);
+                }
+                if (doc) {
+                    WUser.setPoint(openid,_id,doc.point,function(err,doc){
+                        if(err) {
+                            return callback(err);
+                        }
+                        if(doc) {
+                            callback(null, doc);
+                        }
+                    });
+                }
+            });
+
+        }
     });
 };
+
+
+
 

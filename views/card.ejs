@@ -4,20 +4,17 @@
 <header class="header clearfix" style="display:none;" >
 </header>
 <div class="main">
-  <style>
-    .cart-item {text-align: center;width:45%;padding:10px 2.5%;overflow: hidden;float:left;}
-    .card {border:1px solid #ddd;border-radius: 5px;padding:20px;overflow: hidden;background:#fff}
-    .price {float:left;font-size:20px;line-height:60px;}
-    .card-logo {float:right;width:60px;height:60px;border-radius: 60px;}
-  </style>
+  <div class="user-point">
+    您的当前积分 <em><%- wuser.point %></em>可以兑换
+  </div>
   <% posts.forEach(function (post) { %>
-  <div class="cart-item">
+  <div class="card-item">
     <a href="/card/<%= post._id %>">
     <div class="card">
       <span class="price">￥ <%= post.price %> </span>
       <img src="<%- post.thumb %>"  class="card-logo" alt="" />
     </div>
-    <p style="margin-top:5px;font-size:12px;"><%= post.title %></p>
+    <p><%= post.title %></p>
     </a>
   </div>
   <% }) %>

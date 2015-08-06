@@ -102,7 +102,7 @@ module.exports = function (app) {
         var _id = req.params._id;
         var arg = url.parse(req.url).query;
         var type = querystring.parse(arg).action;
-        if(req.session.wuser == undefined) return res.end("请先用微信打开页面");
+        if(req.session.wuser == undefined)  return res.redirect('logintip');
         WUser.setFav(req.session.wuser.openid,_id,type,function(err){
             if (err) {
                 return res.redirect('back');
@@ -132,7 +132,7 @@ module.exports = function (app) {
 
     app.get('/case', function(req, res) {
 
-        WUser.get("sdfadfa1231231231",function(err, wuser){
+        /*WUser.get("sdfadfa1231231231",function(err, wuser){
             if(err || wuser == null){
                 var _user = new WUser({
                     openid: "sdfadfa1231231231",
@@ -152,7 +152,7 @@ module.exports = function (app) {
                     }
                 });
             }
-        })
+        })*/
 
 
 
@@ -183,10 +183,14 @@ module.exports = function (app) {
                 req.flash('error', err);
                 return res.redirect('/');
             }
-            res.render('card', {
-                title: '兑换',
-                posts: posts
+            WUser.get(req.session.wuser.openid,function(err, wuser){
+                res.render('card', {
+                    title: '兑换',
+                    posts: posts,
+                    wuser : wuser
+                });
             });
+
         });
     });
 
@@ -196,12 +200,30 @@ module.exports = function (app) {
                 req.flash('error', err);
                 return res.redirect('/');
             }
-            res.render('cardarticle', {
-                title: post.title,
-                post: post,
-                user: req.session.user
+            WUser.get(req.session.wuser.openid,function(err, wuser){
+                var isBuy =  post.point < wuser.point;
+                res.render('cardarticle', {
+                    title: post.title,
+                    post: post,
+                    wuser: wuser,
+                    isBuy :  isBuy
+                });
             });
+
         });
+    });
+
+    app.post('/exchange/:_id', function(req, res) {
+        var _id = req.params._id;
+        if(req.session.wuser == undefined)  return res.redirect('/logintip');
+        Card.exchange(req.session.wuser.openid,_id,function(err){
+            console.info(err);
+            if (err) {
+                return res.redirect('back');
+            }
+            res.end("success");
+        })
+
     });
 
     app.get('/p/:_id', function(req, res){
@@ -223,7 +245,6 @@ module.exports = function (app) {
                 wuser.fav.forEach(function(i){
                     if(i === _id) isFav = true;
                 });
-                console.info("isFav:" + isFav);
                  res.render('casedetail', {
                     user : req.session.wuser,
                     isFav : isFav,
