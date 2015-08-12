@@ -124,6 +124,21 @@ Card.exchange = function(openid,_id,callback){
     });
 };
 
+Card.getCards = function (cards,callback) {
+    cardModel.find({"_id":{"$all":cards}},{
+        "title": 1,
+        "point": 1,
+        "thumb": 1,
+        "price": 1,
+    }, { multi: true },function (err, docs) {
+        if (err) {
+            return callback(err);
+        }
+        console.info(docs);
+        callback(null, docs);
+    });
+};
+
 
 
 

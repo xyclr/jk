@@ -132,7 +132,7 @@ module.exports = function (app) {
 
     app.get('/case', function(req, res) {
 
-        /*WUser.get("sdfadfa1231231231",function(err, wuser){
+        WUser.get("sdfadfa1231231231",function(err, wuser){
             if(err || wuser == null){
                 var _user = new WUser({
                     openid: "sdfadfa1231231231",
@@ -152,7 +152,7 @@ module.exports = function (app) {
                     }
                 });
             }
-        })*/
+        })
 
 
 
@@ -194,6 +194,21 @@ module.exports = function (app) {
         });
     });
 
+    app.get('/mycards', function (req, res) {
+        WUser.get(req.session.wuser.openid,function(err, wuser){
+
+            Card.getCards(wuser.card,function (err, posts) {
+                if (err) {
+                    return res.redirect('/');
+                }
+                res.render('mycards', {
+                    title: '我的卡券',
+                    posts: posts
+                });
+            });
+        });
+    });
+
     app.get('/card/:_id', function(req, res){
         Card.getOne(req.params._id, function (err, post) {
             if (err) {
@@ -203,6 +218,25 @@ module.exports = function (app) {
             WUser.get(req.session.wuser.openid,function(err, wuser){
                 var isBuy =  post.point < wuser.point;
                 res.render('cardarticle', {
+                    title: post.title,
+                    post: post,
+                    wuser: wuser,
+                    isBuy :  isBuy
+                });
+            });
+
+        });
+    });
+
+    app.get('/mycard/:_id', function(req, res){
+        Card.getOne(req.params._id, function (err, post) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('/');
+            }
+            WUser.get(req.session.wuser.openid,function(err, wuser){
+                var isBuy =  post.point < wuser.point;
+                res.render('mycard', {
                     title: post.title,
                     post: post,
                     wuser: wuser,
