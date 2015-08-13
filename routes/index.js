@@ -28,7 +28,7 @@ module.exports = function (app) {
     app.get('/', function(req, res) {
         var url = client.getAuthorizeURL('http://www.sd188.cn/user','','snsapi_userinfo');
         console.info("AuthorizeURL: " + url);
-        res.redirect(url)
+        res.redirect(url);
     })
 
 
@@ -131,31 +131,31 @@ module.exports = function (app) {
 
 
     app.get('/case', function(req, res) {
-
-        WUser.get("sdfadfa1231231231",function(err, wuser){
-            if(err || wuser == null){
-                var _user = new WUser({
-                    openid: "sdfadfa1231231231",
-                    nickname: "苟建军杀敌发到付",
-                    headimgurl: "http://www.ndesig.com/img/profile_small.jpg",
-                    city: "Chengdu",
-                    province: "Sichuan",
-                    country: "China",
-                    sex: 1
-                });
-                _user.save(function(err, wuser) {
-                    if (err) {
-                        console.log('User save error ....' + err);
-                    } else {
-                        console.log('User save sucess ....' + err);
-                        req.session.wuser = wuser;
-                    }
-                });
-            }
-        })
-
-
-
+        var arg = url.parse(req.url).query;
+        var type = querystring.parse(arg).debug;
+        if(type) {
+            WUser.get("sdfadfa1231231231",function(err, wuser){
+                if(err || wuser == null){
+                    var _user = new WUser({
+                        openid: "sdfadfa1231231231",
+                        nickname: "苟建军杀敌发到付",
+                        headimgurl: "http://www.ndesig.com/img/profile_small.jpg",
+                        city: "Chengdu",
+                        province: "Sichuan",
+                        country: "China",
+                        sex: 1
+                    });
+                    _user.save(function(err, wuser) {
+                        if (err) {
+                            console.log('User save error ....' + err);
+                        } else {
+                            console.log('User save sucess ....' + err);
+                            req.session.wuser = wuser;
+                        }
+                    });
+                }
+            });
+        }
         Post.getArchive(function (err, posts) {
             if (err) {
                 req.flash('error', err);
@@ -196,14 +196,16 @@ module.exports = function (app) {
 
     app.get('/mycards', function (req, res) {
         WUser.get(req.session.wuser.openid,function(err, wuser){
-
+            console.info(wuser.card);
+            console.info(genCardObj(wuser.card));
             Card.getCards(wuser.card,function (err, posts) {
                 if (err) {
                     return res.redirect('/');
                 }
                 res.render('mycards', {
                     title: '我的卡券',
-                    posts: posts
+                    posts: posts,
+                    cardstotal : genCardObj(wuser.card)
                 });
             });
         });
@@ -252,6 +254,18 @@ module.exports = function (app) {
         if(req.session.wuser == undefined)  return res.redirect('/logintip');
         Card.exchange(req.session.wuser.openid,_id,function(err){
             console.info(err);
+            if (err) {
+                return res.redirect('back');
+            }
+            res.end("success");
+        })
+
+    });
+
+    app.post('/useCard/:_id', function(req, res) {
+        var _id = req.params._id;
+        if(req.session.wuser == undefined)  return res.redirect('/logintip');
+        WUser.useCard(req.session.wuser.openid,_id,function(err){
             if (err) {
                 return res.redirect('back');
             }
@@ -344,4 +358,28 @@ module.exports = function (app) {
         }
         next();
     }
+
+    function genCardObj(arr){
+        var obj = {};
+        for(var i=0;i<arr.length; i++) {
+            if(obj[arr[i]]  == undefined) {
+                obj[arr[i]] = 1
+            } else {
+                obj[arr[i]]++;
+            }
+        };
+        return obj;
+    }
+
+    function delCardItem (arr,dx) {
+        for(var i=0;i<arr.length; i++) {
+            if(arr[i] == dx) {
+                arr.splice(i,1)
+                break;
+            }
+        };
+        return arr;
+    }
+
+
 }

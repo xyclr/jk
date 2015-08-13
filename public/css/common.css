@@ -87,7 +87,9 @@ footer.cart .btn-add-fav,footer.cart .btn-remove-fav  { border-color:#faa500; ba
 footer.card { position:fixed; z-index:1000; bottom:0; width:100%;text-align: center; border-top:solid 1px #e5e5e5; box-sizing:border-box; padding:10px 0; background-color:#fff; }
 footer.card a { display:inline-block; margin-right:10px; }
 .card-item {text-align: center;width:45%;padding:10px 2.5%;overflow: hidden;float:left;}
-.card {border:1px solid #ddd;border-radius: 5px;padding:10px;overflow: hidden;background:#fff}
+.card-item .tag {position: absolute; right: 0; bottom: 0; background: red; display: block;  height: 12px; font-size: 12px; line-height: 12px; border-radius: 5px; color: #fff; padding: 0 5px;}
+.card-item .tag.hide {display: none}
+.card {border:1px solid #ddd;border-radius: 5px;padding:10px;overflow: hidden;background:#fff;position: relative}
 .price {float:left;font-size:20px;line-height:60px;}
 .card-item p {height:20px;overflow: hidden;margin-top:5px;font-size:12px;}
 .card-logo {float:right;width:50px;height:50px;border-radius: 50px;}

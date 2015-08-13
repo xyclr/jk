@@ -125,7 +125,7 @@ Card.exchange = function(openid,_id,callback){
 };
 
 Card.getCards = function (cards,callback) {
-    cardModel.find({"_id":{"$all":cards}},{
+    cardModel.find({"_id":{"$in":cards}},{
         "title": 1,
         "point": 1,
         "thumb": 1,
@@ -134,7 +134,6 @@ Card.getCards = function (cards,callback) {
         if (err) {
             return callback(err);
         }
-        console.info(docs);
         callback(null, docs);
     });
 };

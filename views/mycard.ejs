@@ -8,14 +8,13 @@
 </style>
 <div class="main">
     <div class="card-info">
-      <p>兑换此券要使用<%= post.point %> 积分</p>
+      <p><%= post.title %></p>
       <div class="card-item">
         <a href="/card/<%= post._id %>">
           <div class="card">
             <span class="price">￥ <%= post.price %> </span>
             <img src="<%- post.thumb %>"  class="card-logo" alt="" />
           </div>
-          <p><%= post.title %></p>
         </a>
       </div>
     </div>
@@ -24,19 +23,19 @@
 </div>
 
 <footer class="nav">
-  <a href="javascript:void(0)" class="btn-exchange" id="exchange">使用</a>
+  <a href="javascript:void(0)" class="btn-exchange" id="useCard">使用</a>
 </footer>
 <script>
   $(function(){
-    $("#exchange").not(".dis").click(function(){
-      var url = "http://" + window.location.host + "/exchange/" + window.location.pathname.split('/')[2];
+    $("#useCard").not(".dis").click(function(){
+      var url = "http://" + window.location.host + "/useCard/" + window.location.pathname.split('/')[2];
       $.ajax({
         type :"POST",
         url: url,
         success: function(data){
             if(data == "success") {
-              alert("兑换成功！")
-              window.location.href = "http://" + window.location.host + "/card"
+              alert("使用卡片成功，请查收微信消息！");
+              window.location.href = "http://" + window.location.host + "/my"
             }
         }
       });

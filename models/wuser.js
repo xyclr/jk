@@ -111,3 +111,17 @@ WUser.setPoint = function(openid,_id,point, callback) {
     }
   });
 };
+
+//使用卡片
+WUser.useCard = function(openid,_id,callback) {
+  wuserModel.update({openid: openid},{
+    $pop: {"card": _id}
+  },function (err, wuser) {
+    if (err) {
+      return callback(err);
+    }
+    if (wuser) {
+      callback(null, wuser);
+    }
+  });
+};

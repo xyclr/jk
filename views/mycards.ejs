@@ -5,15 +5,16 @@
 </header>
 <div class="main">
   <% posts.forEach(function (post) { %>
-  <div class="card-item">
-    <a href="/mycard/<%= post._id %>">
-    <div class="card">
-      <span class="price">￥ <%= post.price %> </span>
-      <img src="<%- post.thumb %>"  class="card-logo" alt="" />
+    <div class="card-item">
+      <a href="/mycard/<%= post._id %>">
+      <div class="card">
+        <span class="tag <% if(cardstotal[post._id]  == 1) { %>hide<% } %>"><%- cardstotal[post._id] %></span>
+        <span class="price">￥ <%= post.price %> </span>
+        <img src="<%- post.thumb %>"  class="card-logo" alt="" />
+      </div>
+      <p><%= post.title %></p>
+      </a>
     </div>
-    <p><%= post.title %></p>
-    </a>
-  </div>
   <% }) %>
 </div>
 
@@ -32,6 +33,5 @@
     <span class="txt">我的</span>
   </a>
 </footer>
-
 </body>
 </html>
